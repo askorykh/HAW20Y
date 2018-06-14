@@ -14,4 +14,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter
     {
         return new BCryptPasswordEncoder();
     }
+
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry)
+    {
+        registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedOrigins("*")
+            .allowedHeaders("*");
+    }
 }

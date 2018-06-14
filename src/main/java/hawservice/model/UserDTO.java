@@ -1,12 +1,18 @@
 package hawservice.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +23,12 @@ import lombok.NoArgsConstructor;
 public class UserDTO
 {
     @Id
+    @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "users_id_seq")
     private Long id;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime dateCreated;
 
     private String code;
 
@@ -36,5 +47,6 @@ public class UserDTO
     private String password;
 
     private boolean enabled;
+
 
 }

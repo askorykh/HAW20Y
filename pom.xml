@@ -19,6 +19,12 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <surefire.version>2.14</surefire.version>
+
+        <liquibase.sql.url>jdbc:postgresql://localhost:5432/postgres</liquibase.sql.url>
+        <liquibase.sql.username>oleksiiskorykh</liquibase.sql.username>
+        <liquibase.sql.password>Ahiles198</liquibase.sql.password>
+        <liquibase.sql.changelogfile>src/main/resources/liquibase/changelog.xml</liquibase.sql.changelogfile>
+        <liquibase.sql.driver>org.postgresql.Driver</liquibase.sql.driver>
     </properties>
 
     <dependencies>
@@ -62,12 +68,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.postgis</groupId>
-            <artifactId>postgis-jdbc</artifactId>
-            <version>1.5.3</version>
+            <version>42.2.2</version>
         </dependency>
 
         <dependency>
@@ -119,6 +120,16 @@
             <version>1.16.12</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.extended</artifactId>
+            <version>5.0.0.GA</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -139,4 +150,48 @@
             <url>http://maven.springframework.org/release</url>
         </repository>
     </repositories>
+    <build>
+
+
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <changeLogFile>${liquibase.sql.changelogfile}</changeLogFile>
+                    <driver>${liquibase.sql.driver}</driver>
+                    <url>${liquibase.sql.url}</url>
+                    <username>${liquibase.sql.username}</username>
+                    <password>${liquibase.sql.password}</password>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.2</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <compilerArgument>-parameters</compilerArgument>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>
