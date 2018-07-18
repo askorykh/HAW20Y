@@ -20,9 +20,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <surefire.version>2.14</surefire.version>
 
-        <liquibase.sql.url>jdbc:postgresql://localhost:5432/postgres</liquibase.sql.url>
-        <liquibase.sql.username>oleksiiskorykh</liquibase.sql.username>
-        <liquibase.sql.password>Ahiles198</liquibase.sql.password>
+        <liquibase.sql.url>jdbc:postgresql://dev.elasteam.com:5432/postgres</liquibase.sql.url>
+        <liquibase.sql.username>postgres</liquibase.sql.username>
+        <liquibase.sql.password>postgres</liquibase.sql.password>
         <liquibase.sql.changelogfile>src/main/resources/liquibase/changelog.xml</liquibase.sql.changelogfile>
         <liquibase.sql.driver>org.postgresql.Driver</liquibase.sql.driver>
     </properties>
