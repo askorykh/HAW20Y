@@ -1,5 +1,6 @@
 package hawservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ public class UserDTO
     private Long id;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @JsonIgnore
     private DateTime dateCreated;
 
     private String code;
@@ -44,8 +46,10 @@ public class UserDTO
 
     private String geo_location_new;
 
+    @JsonIgnore
     private String password;
 
+    @JsonIgnore
     private boolean enabled;
 
 
