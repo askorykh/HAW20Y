@@ -4,44 +4,38 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-    <changeSet author="o.skorykh" id="001">
-        <comment>Add table users</comment>
-        <createTable tableName="users">
+    <changeSet author="o.skorykh" id="002">
+        <comment>Add table events</comment>
+        <createTable tableName="events">
             <column name="id" type="bigserial"/>
             <column name="date_created" defaultValueComputed="now()" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
-            <column name="code" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="first_name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="grad_year" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="geo_location_old" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="geo_location_new" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="enabled" type="boolean" defaultValue="false">
                 <constraints nullable="false"/>
             </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="location" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dateOfEvent" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="image_name" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="image" type="bytea">
+                <constraints nullable="true"/>
+            </column>
 
         </createTable>
         <addPrimaryKey columnNames="id"
-                       constraintName="pk_users" tableName="users"/>
+                       constraintName="pk_events" tableName="events"/>
     </changeSet>
 
 </databaseChangeLog>
