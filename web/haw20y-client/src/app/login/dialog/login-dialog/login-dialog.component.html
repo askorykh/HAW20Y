@@ -1,0 +1,20 @@
+<div class="dialog_content" mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="data.email">
+  </mat-form-field>
+  <mat-form-field *ngIf="data.isLoginDialog">
+    <input matInput placeholder="Password" [(ngModel)]="data.password">
+  </mat-form-field>
+  <mat-form-field *ngIf="!data.isLoginDialog">
+    <input matInput placeholder="Subject" [(ngModel)]="data.subject">
+  </mat-form-field>
+  <mat-form-field *ngIf="!data.isLoginDialog">
+    <textarea matInput placeholder="Message" [(ngModel)]="data.message">
+    </textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="data.isLoginDialog" mat-button (click)="onNoClick()">Login</button>
+  <button *ngIf="data.isLoginDialog" mat-button (click)="onNoClick()">Register</button>
+  <button *ngIf="!data.isLoginDialog" mat-button (click)="onNoClick()">Send</button>
+</div>
