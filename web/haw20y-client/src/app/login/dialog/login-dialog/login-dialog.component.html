@@ -1,0 +1,22 @@
+<div class="dialog_content" mat-dialog-content>
+  <form [formGroup]="formGroup" >
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" [(ngModel)]="data.email">
+  </mat-form-field>
+  <mat-form-field *ngIf="data.isLoginDialog">
+    <input matInput placeholder="Password" formControlName="password" [(ngModel)]="data.password">
+  </mat-form-field>
+  <mat-form-field *ngIf="!data.isLoginDialog">
+    <input matInput placeholder="Subject" formControlName="subject" [(ngModel)]="data.subject">
+  </mat-form-field>
+  <mat-form-field *ngIf="!data.isLoginDialog">
+    <textarea matInput placeholder="Message" formControlName="message" [(ngModel)]="data.message">
+    </textarea>
+  </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="data.isLoginDialog" mat-button (click)="onSubmit()">Login</button>
+  <button *ngIf="data.isLoginDialog" mat-button (click)="onRegister()">Register</button>
+  <button *ngIf="!data.isLoginDialog" mat-button (click)="onNoClick()">Send</button>
+</div>

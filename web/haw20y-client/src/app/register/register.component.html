@@ -1,0 +1,46 @@
+<div class="upper_content">
+  <button mat-button (click)="onBackHome()">Back to Home</button>
+</div>
+<div style="display: grid">
+<div class="form_content">
+  <form #form="ngForm" [formGroup]="registerForm">
+      <div class="left_col">
+      <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName" >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName" >
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="Enrollment Date" formControlName="enrollmentDate" >
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="Graduation Date" formControlName="graduationDate" >
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="Email" formControlName="email" >
+      </mat-form-field>
+      </div>
+    <div class="right_col">
+      <mat-form-field >
+        <input matInput placeholder="Password" formControlName="password" >
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="Origin Country" formControlName="originCountry" >
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="Current Country" formControlName="currentCountry" >
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="Current Job" formControlName="currentJob" >
+      </mat-form-field>
+      <mat-form-field >
+        <mat-checkbox [formControlName]="agreeTerms"> I Agree with terms and conditions</mat-checkbox>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div>
+  <button class="submit_register" mat-button (click)="onSubmitUser()">Submit</button>
+</div>
+</div>

@@ -1,0 +1,22 @@
+<div >
+  <div style="height: 130px;"  >
+    <div class="logo_holder" >
+      <img src="../../assets/img/HAW_Marke.png">
+    </div>
+    <div class="buttons_holder">
+    <div class="button_holder" >
+      <button mat-button (click)="setDialogType(true)" ><span class="button_text">Join or Login </span></button>
+    </div>
+    <div class="button_holder">
+      <button mat-button *ngIf=""><span class="button_text">Events</span></button>
+    </div>
+    <div class="button_holder">
+      <button mat-button (click)="setDialogType(false)" ><span class="button_text"> Contacts </span></button>
+    </div>
+    </div>
+  </div>
+  <div class="map_holder" >
+    <img src="../../assets/img/map.png">
+  </div>
+</div>
+
