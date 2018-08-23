@@ -3,44 +3,54 @@
 </div>
 <div style="display: grid">
 <div class="form_content">
-  <form #form="ngForm" [formGroup]="registerForm">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
       <div class="left_col">
       <mat-form-field>
-        <input matInput placeholder="First Name" formControlName="firstName" >
+        <input matInput formControlName="firstName" placeholder="First Name" >
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Last Name" formControlName="lastName" >
+        <input matInput formControlName="lastName" placeholder="Last Name"  >
       </mat-form-field>
       <mat-form-field >
-        <input matInput placeholder="Enrollment Date" formControlName="enrollmentDate" >
+        <input matInput [matDatepicker]="pickerEnroll" placeholder="Enrollment Date">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnroll"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnroll></mat-datepicker>
       </mat-form-field>
       <mat-form-field >
-        <input matInput placeholder="Graduation Date" formControlName="graduationDate" >
+        <input matInput [matDatepicker]="pickerGraduation" placeholder="Graduation Date">
+        <mat-datepicker-toggle matSuffix [for]="pickerGraduation"></mat-datepicker-toggle>
+        <mat-datepicker #pickerGraduation></mat-datepicker>
       </mat-form-field>
       <mat-form-field >
-        <input matInput placeholder="Email" formControlName="email" >
+        <input matInput formControlName="email" placeholder="Email"  >
       </mat-form-field>
+      <mat-checkbox formControlName="agreeTerms" > I Agree with terms and conditions</mat-checkbox>
       </div>
     <div class="right_col">
       <mat-form-field >
-        <input matInput placeholder="Password" formControlName="password" >
+        <input matInput formControlName="password" placeholder="Password"  >
       </mat-form-field>
       <mat-form-field >
-        <input matInput placeholder="Origin Country" formControlName="originCountry" >
+        <mat-select formControlName="originCountry" placeholder="Origin Country">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field >
-        <input matInput placeholder="Current Country" formControlName="currentCountry" >
+        <mat-select formControlName="currentCountry" placeholder="Current Country">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field >
-        <input matInput placeholder="Current Job" formControlName="currentJob" >
-      </mat-form-field>
-      <mat-form-field >
-        <mat-checkbox [formControlName]="agreeTerms"> I Agree with terms and conditions</mat-checkbox>
+        <input matInput formControlName="currentJob" placeholder="Current Job"  >
       </mat-form-field>
     </div>
+    <div class="button_holder">
+      <button class="submit_register" mat-button (click)="onSubmitUser()">Submit</button>
+    </div>
   </form>
-</div>
-<div>
-  <button class="submit_register" mat-button (click)="onSubmitUser()">Submit</button>
 </div>
 </div>

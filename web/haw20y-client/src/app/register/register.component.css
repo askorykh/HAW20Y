@@ -28,3 +28,9 @@ button {
   float: right;
   margin-right: 38%;
 }
+
+.button_holder {
+  float: right;
+  margin-right: 61%;
+  width: 0px;
+}

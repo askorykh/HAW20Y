@@ -14,18 +14,18 @@ import {Router} from '@angular/router';
 export class LoginDialogComponent implements OnInit {
   private submitted: boolean;
   private loginForm: FormGroup;
+  public hide = true;
+
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
               private appService: AppService,
               private router: Router,
               private formBuilder: FormBuilder) {
-    console.log(data.isLoginDialog);
-  }
-
-  ngOnInit(): void {
     this.createLoginForm();
   }
+
+  ngOnInit(): void { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -37,12 +37,12 @@ export class LoginDialogComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group( {
-      firstName: '',
-      lastName: '',
+      email: '',
       password: '',
       subject: '',
       message: ''
     });
+    console.log(this.loginForm);
   }
 
   get form() {

@@ -1,16 +1,16 @@
 <div class="dialog_content" mat-dialog-content>
   <form [formGroup]="formGroup" >
   <mat-form-field>
-    <input matInput placeholder="Email" formControlName="email" [(ngModel)]="data.email">
+    <input matInput placeholder="Email" formControlName="email" >
   </mat-form-field>
   <mat-form-field *ngIf="data.isLoginDialog">
-    <input matInput placeholder="Password" formControlName="password" [(ngModel)]="data.password">
+    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
   </mat-form-field>
   <mat-form-field *ngIf="!data.isLoginDialog">
-    <input matInput placeholder="Subject" formControlName="subject" [(ngModel)]="data.subject">
+    <input matInput placeholder="Subject" formControlName="subject" >
   </mat-form-field>
   <mat-form-field *ngIf="!data.isLoginDialog">
-    <textarea matInput placeholder="Message" formControlName="message" [(ngModel)]="data.message">
+    <textarea matInput placeholder="Message" formControlName="message" >
     </textarea>
   </mat-form-field>
   </form>
