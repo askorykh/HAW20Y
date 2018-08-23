@@ -1,0 +1,39 @@
+button {
+  background-color: #A0BEDC;
+}
+.upper_content {
+  width: 100%;
+  margin-top: 2%;
+  margin-left: 35%;
+}
+.left_col {
+  float: left;
+  margin: 5%;
+  display: inline-grid;
+}
+
+.right_col {
+  float: left;
+  margin: 5%;
+  display: inline-grid;
+}
+
+.form_content {
+  width: 100%;
+  margin-left: 28%;
+  margin-top: 2%;
+}
+
+.submit_register {
+  float: right;
+  margin-right: 38%;
+}
+
+.button_holder {
+  float: right;
+  margin-right: 61%;
+  width: 0px;
+}
+.button_text {
+  color: #003CA0;
+}

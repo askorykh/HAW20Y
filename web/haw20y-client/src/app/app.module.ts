@@ -13,10 +13,12 @@ import {AppService} from "./app.service";
 import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
 import {HomeComponent} from "./login/home.component";
 import { RegisterComponent } from './register/register.component';
+import { AdminComponent } from './admin/admin.component';
 
 const appRoutes: Routes = [
   { path: 'home',      component: HomeComponent },
   { path: 'register',      component: RegisterComponent },
+  { path: 'admin',      component: AdminComponent },
   { path: '**', component: HomeComponent }
 ];
 
@@ -27,7 +29,8 @@ const _window = {provide: 'Window', useValue: window};
     AppComponent,
     HomeComponent,
     LoginDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   entryComponents: [
     HomeComponent,
