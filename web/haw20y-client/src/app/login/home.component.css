@@ -1,0 +1,30 @@
+button {
+  background-color: #A0BEDC;
+}
+.logo_holder {
+  padding: 5px;
+  display: inline-block;
+  float: left;
+  width: 33%;
+}
+.button_holder {
+  padding: 5px;
+  display: inline-block;
+  float: left;
+}
+
+.buttons_holder {
+
+}
+
+.button_text {
+  color: #003CA0;
+}
+
+.map_holder {
+  border: solid black 1px;
+  margin-top: 2%;
+  padding: 5%;
+  float: left;
+  margin-left: -13%;
+}
