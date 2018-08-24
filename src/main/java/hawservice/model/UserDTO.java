@@ -46,7 +46,6 @@ public class UserDTO
 
     private String geo_location_new;
 
-    @JsonIgnore
     private String password;
 
     @JsonIgnore
