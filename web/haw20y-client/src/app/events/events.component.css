@@ -1,0 +1,19 @@
+.event-card {
+  max-width: 400px;
+}
+
+.event-header-image {
+  background-image: url('../../assets/img/HAW_Marke.png');
+  background-size: cover;
+}
+
+.upper_content {
+  width: 100%;
+  margin-top: 2%;
+  margin-left: 45%;
+}
+
+button {
+  background-color: #A0BEDC;
+  color: white;
+}

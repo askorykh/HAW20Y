@@ -3,20 +3,25 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import {AppMaterialModule} from "./app-material/app-material.module";
+import {AppMaterialModule} from './app-material/app-material.module';
 import { LoginDialogComponent } from './login/dialog/login-dialog/login-dialog.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
-import {RouterModule, Routes} from "@angular/router";
-import {AppService} from "./app.service";
-import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
-import {HomeComponent} from "./login/home.component";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {RouterModule, Routes} from '@angular/router';
+import {AppService} from './app.service';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {HomeComponent} from './login/home.component';
 import { RegisterComponent } from './register/register.component';
+import { AdminComponent } from './admin/admin.component';
+import { EventsComponent } from './events/events.component';
+
 
 const appRoutes: Routes = [
   { path: 'home',      component: HomeComponent },
   { path: 'register',      component: RegisterComponent },
+  { path: 'admin',      component: AdminComponent },
+  { path: 'events',      component: EventsComponent },
   { path: '**', component: HomeComponent }
 ];
 
@@ -27,7 +32,9 @@ const _window = {provide: 'Window', useValue: window};
     AppComponent,
     HomeComponent,
     LoginDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    EventsComponent
   ],
   entryComponents: [
     HomeComponent,
