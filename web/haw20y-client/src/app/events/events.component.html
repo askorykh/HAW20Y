@@ -1,0 +1,24 @@
+<div class="upper_content">
+  <button mat-button (click)="onBackHome()">Back to Home</button>
+</div>
+<div style="overflow: hidden">
+<div style="display: inline-block;margin: 1%;" *ngFor="let event of events">
+<mat-card class="event-card">
+  <mat-card-header>
+    <div mat-card-avatar class="event-header-image"></div>
+    <mat-card-title>{{event.title}}</mat-card-title>
+    <mat-card-subtitle>{{event.subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{event.imgSource}}" alt="event_photo">
+  <mat-card-content>
+    <p>
+      {{event.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Guest List</button>
+    <button mat-button>Show on Map</button>
+  </mat-card-actions>
+</mat-card>
+</div>
+</div>

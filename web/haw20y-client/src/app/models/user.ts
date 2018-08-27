@@ -1,6 +1,6 @@
-import {GeoObject} from "./geoObject";
+import {GeoObject} from './geoObject';
 
-export interface User {
+export class User {
   id: number;
   roleId: number;
   codeId: number;
