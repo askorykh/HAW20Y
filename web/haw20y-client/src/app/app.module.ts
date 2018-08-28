@@ -15,6 +15,7 @@ import {HomeComponent} from './login/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { EventsComponent } from './events/events.component';
+import { FileUploadComponent } from './admin/file-upload/file-upload.component';
 
 
 const appRoutes: Routes = [
@@ -34,7 +35,8 @@ const _window = {provide: 'Window', useValue: window};
     LoginDialogComponent,
     RegisterComponent,
     AdminComponent,
-    EventsComponent
+    EventsComponent,
+    FileUploadComponent
   ],
   entryComponents: [
     HomeComponent,

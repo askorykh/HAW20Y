@@ -1,11 +1,13 @@
-<div class="upper_content">
-  <button mat-button (click)="onBackHome()"> <span class="button_text"> Events </span></button>
+<div style="border: solid #A0BEDC 1px;" class="upper_content">
+  <button mat-button (click)="onEvents()"> <span class="button_text"> Events </span></button>
   <img src="../../assets/img/HAW_Marke.png">
-  <button mat-button (click)="onBackHome()"><span class="button_text">Logout</span></button>
+  <button mat-button (click)="onLogout()"><span class="button_text">Logout</span></button>
 </div>
 <div style="display: grid">
   <div class="form_content">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+    <div style="display: grid; width: 50%; float: left">
+    <form style="display: grid; width: 50%; margin-left: 50%" [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+      <h2 style="float: left; color: #003CA0">Add or Update Event</h2>
       <div class="left_col">
         <mat-form-field >
           <mat-select formControlName="event" placeholder="Event">
@@ -35,32 +37,36 @@
         </mat-form-field>
       </div>
     </form>
-
-      <div class="right_col">
-        <mat-form-field >
-          <input matInput formControlName="password" placeholder="Password"  >
-        </mat-form-field>
-        <mat-form-field >
-          <mat-select formControlName="originCountry" placeholder="Origin Country">
-            <mat-option *ngFor="let country of countries" [value]="country">
-              {{ country }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field >
-          <mat-select formControlName="currentCountry" placeholder="Current Country">
-            <mat-option *ngFor="let country of countries" [value]="country">
-              {{ country }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field >
-          <input matInput formControlName="currentJob" placeholder="Current Job"  >
-        </mat-form-field>
+    </div>
+      <div style="border: solid #A0BEDC 1px; position: absolute; height: 100%; left: 50%; top: 30%;"></div>
+      <div style="float: right; width: 50%">
+      <h2 style="color: #003CA0; margin-left: 5%;">Delete User</h2>
+        <div class="right_col">
+          <mat-form-field >
+            <input matInput formControlName="password" placeholder="Password"  >
+          </mat-form-field>
+          <mat-form-field >
+            <mat-select formControlName="originCountry" placeholder="Origin Country">
+              <mat-option *ngFor="let country of countries" [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field >
+            <mat-select formControlName="currentCountry" placeholder="Current Country">
+              <mat-option *ngFor="let country of countries" [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput formControlName="currentJob" placeholder="Current Job"  >
+          </mat-form-field>
+        </div>
       </div>
-      <div class="button_holder">
-        <button class="submit_register" mat-button (click)="onSubmitUser()"><span class="button_text">Add / Update</span></button>
-        <button class="submit_register" mat-button (click)="onSubmitUser()"><span class="button_text">Delete</span></button>
-      </div>
+  </div>
+  <div class="button_holder">
+    <button class="submit_register" mat-button (click)="onSubmitUser()"><span class="button_text">Delete</span></button>
+    <button class="submit_register" mat-button (click)="onSubmitUser()"><span class="button_text">Add / Update</span></button>
   </div>
 </div>

@@ -4,7 +4,9 @@ button {
 .upper_content {
   width: 100%;
   margin-top: 2%;
-  margin-left: 35%;
+  padding-bottom: 2%;
+  padding-left: 33%;
+  border: solid #A0BEDC 2px;
 }
 .left_col {
   float: left;
@@ -20,7 +22,6 @@ button {
 
 .form_content {
   width: 100%;
-  margin-left: 28%;
   margin-top: 2%;
 }
 
@@ -30,9 +31,8 @@ button {
 }
 
 .button_holder {
-  float: right;
-  margin-right: 61%;
-  width: 0px;
+  width: 50%;
+  margin-left: 33%;
 }
 .button_text {
   color: #003CA0;
