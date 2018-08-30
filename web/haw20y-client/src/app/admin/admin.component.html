@@ -6,7 +6,7 @@
 <div style="display: grid">
   <div class="form_content">
     <div style="display: grid; width: 50%; float: left">
-    <form style="display: grid; width: 50%; margin-left: 50%" [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+    <form style="display: grid; width: 50%; margin-left: 50%" [formGroup]="eventForm" (ngSubmit)="onSubmit()" >
       <h2 style="float: left; color: #003CA0">Add or Update Event</h2>
       <div class="left_col">
         <mat-form-field >
@@ -27,12 +27,12 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field >
-          <input matInput [matDatepicker]="pickerEvent" placeholder="Event Date">
+          <input matInput [matDatepicker]="pickerEvent"  formControlName="eventDate" placeholder="Event Date">
           <mat-datepicker-toggle matSuffix [for]="pickerEvent"></mat-datepicker-toggle>
           <mat-datepicker #pickerEvent></mat-datepicker>
         </mat-form-field>
-        <mat-form-field *ngIf="!data.isLoginDialog">
-          <textarea matInput placeholder="Description" formControlName="description" >
+        <mat-form-field >
+          <textarea matInput placeholder="Description" formControlName="eventDescription" >
           </textarea>
         </mat-form-field>
       </div>

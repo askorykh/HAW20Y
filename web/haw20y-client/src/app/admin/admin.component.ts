@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -18,7 +19,7 @@ export class AdminComponent implements OnInit {
     {id: 6, name: 'Dummy Dumber', country: {id: 6, name: 'Dumbland'}},
   ];
 
-  events = [
+  public events = [
     {
       id: 0,
       dateCreated: new Date(),
@@ -100,7 +101,10 @@ export class AdminComponent implements OnInit {
     name: 'Oleksiland'
   }, {id: 5, name: 'Saakerland'}];
 
-  constructor(private router: Router) {
+  eventForm: FormGroup;
+
+  constructor(private router: Router, private formBuilder: FormBuilder) {
+    this.createRegisterForm();
   }
 
   ngOnInit() {
@@ -112,6 +116,16 @@ export class AdminComponent implements OnInit {
 
   onLogout() {
     this.router.navigate(['home']);
+  }
+
+  createRegisterForm() {
+    this.eventForm = this.formBuilder.group({
+      event: [''],
+      eventTitle: [''],
+      eventLocation: [''],
+      eventDate: [''],
+      eventDescription: ['']
+    });
   }
 
 }
