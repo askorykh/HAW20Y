@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HawEvent} from '../models/hawevent';
 import {Student} from '../models/student';
+import {PageEvent} from '@angular/material';
 
 
 @Component({
@@ -11,6 +12,14 @@ import {Student} from '../models/student';
 export class EventsComponent implements OnInit {
 
   events: HawEvent[] = [];
+
+  initialIndex = 0;
+
+  finalIndex = 4;
+
+  sizeList = 0;
+
+  currentPage = 0;
 
   constructor() {
     const mockEvent = new HawEvent();
@@ -27,9 +36,21 @@ export class EventsComponent implements OnInit {
     for (let i = 0; i <= 10; i++) {
       this.events.push(mockEvent);
     }
+    this.sizeList = this.events.length;
   }
 
   ngOnInit() {
+  }
+
+  onPageEvent(event: PageEvent) {
+    if (this.currentPage < event.pageIndex) {
+      this.initialIndex += event.pageSize;
+      this.finalIndex += event.pageSize;
+    } else if (this.currentPage > event.pageIndex) {
+      this.initialIndex -= event.pageSize;
+      this.finalIndex -= event.pageSize;
+    }
+    this.currentPage = event.pageIndex;
   }
 
 }
