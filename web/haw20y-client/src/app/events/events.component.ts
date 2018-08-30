@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HawEvent} from '../models/hawevent';
 import {Student} from '../models/student';
 import {PageEvent} from '@angular/material';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class EventsComponent implements OnInit {
 
   currentPage = 0;
 
-  constructor() {
+  constructor(private router: Router) {
     const mockEvent = new HawEvent();
     const mockGuest = new Student();
     mockEvent.title = 'HAW 20 Years Alumni Meeting';
@@ -51,6 +52,10 @@ export class EventsComponent implements OnInit {
       this.finalIndex -= event.pageSize;
     }
     this.currentPage = event.pageIndex;
+  }
+
+  onBackHome() {
+    this.router.navigate(['home']);
   }
 
 }
