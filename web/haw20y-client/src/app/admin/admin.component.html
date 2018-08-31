@@ -6,12 +6,13 @@
 <div style="display: grid">
   <div class="form_content">
     <div style="display: grid; width: 50%; float: left">
-    <form style="display: grid; width: 50%; margin-left: 50%" [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+    <form style="display: grid; width: 50%; margin-left: 50%" [formGroup]="eventForm" (ngSubmit)="onSubmitEvent()" >
       <h2 style="float: left; color: #003CA0">Add or Update Event</h2>
       <div class="left_col">
         <mat-form-field >
-          <mat-select formControlName="event" placeholder="Event">
-            <mat-option *ngFor="let event of events" [value]="event.title">
+          <mat-select formControlName="event" (change)="onEventSelect($event.value)" placeholder="Event">
+            <mat-option>New</mat-option>
+            <mat-option *ngFor="let event of events" [value]="event">
               {{ event.title }}
             </mat-option>
           </mat-select>
@@ -27,12 +28,12 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field >
-          <input matInput [matDatepicker]="pickerEvent" placeholder="Event Date">
+          <input matInput [matDatepicker]="pickerEvent"  formControlName="eventDate" placeholder="Event Date">
           <mat-datepicker-toggle matSuffix [for]="pickerEvent"></mat-datepicker-toggle>
           <mat-datepicker #pickerEvent></mat-datepicker>
         </mat-form-field>
-        <mat-form-field *ngIf="!data.isLoginDialog">
-          <textarea matInput placeholder="Description" formControlName="description" >
+        <mat-form-field >
+          <textarea matInput placeholder="Description" formControlName="eventDescription" >
           </textarea>
         </mat-form-field>
       </div>
@@ -43,30 +44,47 @@
       <h2 style="color: #003CA0; margin-left: 5%;">Delete User</h2>
         <div class="right_col">
           <mat-form-field >
-            <input matInput formControlName="password" placeholder="Password"  >
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter User Name" >
           </mat-form-field>
-          <mat-form-field >
-            <mat-select formControlName="originCountry" placeholder="Origin Country">
-              <mat-option *ngFor="let country of countries" [value]="country">
-                {{ country }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field >
-            <mat-select formControlName="currentCountry" placeholder="Current Country">
-              <mat-option *ngFor="let country of countries" [value]="country">
-                {{ country }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field >
-            <input matInput formControlName="currentJob" placeholder="Current Job"  >
-          </mat-form-field>
+          <div class="table_container">
+          <mat-table #table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="country">
+              <mat-header-cell *matHeaderCellDef> Country </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.country.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef > Delete </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button class="submit_register" mat-button (click)="onDeleteUser(element)"><span class="button_text">Delete</span></button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator #paginator
+                         [pageSize]="5"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         [showFirstLastButtons]="true">
+          </mat-paginator>
+          </div>
+
         </div>
       </div>
   </div>
   <div class="button_holder">
-    <button class="submit_register" mat-button (click)="onSubmitUser()"><span class="button_text">Delete</span></button>
-    <button class="submit_register" mat-button (click)="onSubmitUser()"><span class="button_text">Add / Update</span></button>
+    <button class="submit_register" type="submit" (click)="onSubmitEvent()" mat-button ><span class="button_text">Add / Update</span></button>
   </div>
 </div>
