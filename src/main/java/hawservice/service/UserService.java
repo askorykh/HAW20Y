@@ -1,31 +1,64 @@
 package hawservice.service;
 
+import hawservice.exception.AppException;
 import hawservice.exception.UserNotFoundException;
+import hawservice.model.Payload.SignUpRequest;
+import hawservice.model.Role;
+import hawservice.model.RoleName;
 import hawservice.model.UserDTO;
+import hawservice.repository.RoleRepository;
 import hawservice.repository.UserRepository;
+import hawservice.security.UserPrincipal;
+import java.util.Collections;
 import java.util.List;
 import javax.transaction.Transactional;
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 @Slf4j
-public class UserService
+@Data
+public class UserService implements UserDetailsService
 {
+
     private final UserRepository userRepository;
+
+    private final RoleRepository roleRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
 
     @NonNull
-    public UserDTO createUser(@NonNull UserDTO userDTO)
+    @Transactional
+    public UserDTO createUser(@NonNull SignUpRequest signUpRequest)
     {
-        userDTO.setDateCreated(DateTime.now());
-        userDTO.setEnabled(true);
 
-        return userRepository.save(userDTO);
+        UserDTO user = UserDTO.builder()
+            .first_name(signUpRequest.getFirstName())
+            .last_name(signUpRequest.getLastName())
+            .email(signUpRequest.getEmail())
+            .code("XXX")
+            .password(signUpRequest.getPassword())
+            .build();
+
+        user.setDateCreated(DateTime.now());
+        user.setEnabled(true);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+            .orElseThrow(() -> new AppException("User Role not set."));
+
+        user.setRoles(Collections.singleton(userRole));
+
+        return userRepository.save(user);
     }
 
 
@@ -43,6 +76,7 @@ public class UserService
                 oldUser.setGrad_year(userDTO.getGrad_year());
                 oldUser.setGeo_location_new(userDTO.getGeo_location_new());
                 oldUser.setGeo_location_old(userDTO.getGeo_location_old());
+                oldUser.setRoles(userDTO.getRoles());
 
                 return userRepository.save(oldUser);
             })
@@ -74,6 +108,7 @@ public class UserService
 
 
     @NonNull
+    @Transactional
     public UserDTO getUser(Long id) throws UserNotFoundException
     {
         return userRepository.findById(id)
@@ -84,5 +119,29 @@ public class UserService
     public List<UserDTO> getUsers()
     {
         return userRepository.findAll();
+    }
+
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+    {
+        UserDTO user = userRepository.findByEmail(username)
+            .orElseThrow(() ->
+                new UsernameNotFoundException("User not found with username: " + username)
+            );
+
+        return UserPrincipal.create(user);
+    }
+
+
+    @Transactional
+    public UserDetails loadUserById(Long id)
+    {
+        UserDTO user = userRepository.findById(id).orElseThrow(
+            () -> new UsernameNotFoundException("User not found with id : " + id)
+        );
+
+        return UserPrincipal.create(user);
     }
 }
