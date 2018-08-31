@@ -41,9 +41,10 @@ public class UserService implements UserDetailsService
     {
 
         UserDTO user = UserDTO.builder()
-            .first_name(signUpRequest.getFirstName())
-            .last_name(signUpRequest.getLastName())
+            .firstName(signUpRequest.getFirstName())
+            .lastName(signUpRequest.getLastName())
             .email(signUpRequest.getEmail())
+            .gradYear(signUpRequest.getGradYear())
             .code("XXX")
             .password(signUpRequest.getPassword())
             .build();
@@ -71,11 +72,11 @@ public class UserService implements UserDetailsService
                 oldUser.setEnabled(userDTO.isEnabled());
                 oldUser.setCode(userDTO.getCode());
                 oldUser.setEmail(userDTO.getEmail());
-                oldUser.setFirst_name(userDTO.getFirst_name());
-                oldUser.setLast_name(userDTO.getLast_name());
-                oldUser.setGrad_year(userDTO.getGrad_year());
-                oldUser.setGeo_location_new(userDTO.getGeo_location_new());
-                oldUser.setGeo_location_old(userDTO.getGeo_location_old());
+                oldUser.setFirstName(userDTO.getFirstName());
+                oldUser.setLastName(userDTO.getLastName());
+                oldUser.setGradYear(userDTO.getGradYear());
+                oldUser.setGeoLocationNew(userDTO.getGeoLocationNew());
+                oldUser.setGeoLocationOld(userDTO.getGeoLocationOld());
                 oldUser.setRoles(userDTO.getRoles());
 
                 return userRepository.save(oldUser);

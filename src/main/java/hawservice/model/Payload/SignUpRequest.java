@@ -26,7 +26,7 @@ public class SignUpRequest
     private String password;
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 4, max = 4)
     private String gradYear;
 
 }

@@ -48,15 +48,15 @@ public class UserDTO
     @Email
     private String email;
 
-    private String first_name;
+    private String firstName;
 
-    private String last_name;
+    private String lastName;
 
-    private String grad_year;
+    private String gradYear;
 
-    private String geo_location_old;
+    private String geoLocationOld;
 
-    private String geo_location_new;
+    private String geoLocationNew;
 
     @JsonIgnore
     private String password;

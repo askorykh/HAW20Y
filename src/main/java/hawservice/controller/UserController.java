@@ -28,7 +28,6 @@ public class UserController
     private UserService userService;
 
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id) throws UserNotFoundException
     {
