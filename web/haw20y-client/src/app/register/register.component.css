@@ -34,3 +34,7 @@ button {
   margin-right: 61%;
   width: 0px;
 }
+
+.button_text {
+  color: #003CA0;
+}

@@ -16,8 +16,13 @@ button {
 
 .right_col {
   float: left;
+  width: 35%;
   margin: 5%;
+  margin-left: 2.5%;
+  display: -ms-inline-grid;
   display: inline-grid;
+  position: fixed;
+  margin-top: 0;
 }
 
 .form_content {
@@ -32,8 +37,23 @@ button {
 
 .button_holder {
   width: 50%;
-  margin-left: 33%;
+  margin-top: 5%;
 }
 .button_text {
   color: #003CA0;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
 }
