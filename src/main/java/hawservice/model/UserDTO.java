@@ -42,7 +42,7 @@ public class UserDTO
     @JsonIgnore
     private DateTime dateCreated;
 
-    private String code;
+    private String registrationCode;
 
     @NaturalId
     @Email

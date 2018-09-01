@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService
             .lastName(signUpRequest.getLastName())
             .email(signUpRequest.getEmail())
             .gradYear(signUpRequest.getGradYear())
-            .code("XXX")
+            .registrationCode(signUpRequest.getRegistrationCode())
             .password(signUpRequest.getPassword())
             .build();
 
@@ -54,7 +54,7 @@ public class UserService implements UserDetailsService
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+        Role userRole = roleRepository.findByName(RoleName.USER)
             .orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
@@ -64,13 +64,13 @@ public class UserService implements UserDetailsService
 
 
     @Transactional
-    public UserDTO updateUser(Long id, UserDTO userDTO)
+    public UserDTO updateUser(Long id, UserDTO userDTO) throws UserNotFoundException
     {
-        return userRepository.findById(id)
+        return userRepository.findByIdAndEnabledIsTrue(id)
             .map(oldUser ->
             {
                 oldUser.setEnabled(userDTO.isEnabled());
-                oldUser.setCode(userDTO.getCode());
+                oldUser.setRegistrationCode(userDTO.getRegistrationCode());
                 oldUser.setEmail(userDTO.getEmail());
                 oldUser.setFirstName(userDTO.getFirstName());
                 oldUser.setLastName(userDTO.getLastName());
@@ -81,18 +81,17 @@ public class UserService implements UserDetailsService
 
                 return userRepository.save(oldUser);
             })
-            .orElseGet(() ->
-            {
-                log.info("Cannot update user with id {} because it does not exist. Ignoring request", id);
-                return null;
+            .orElseThrow(() -> {
+                log.info("Cannot delete user with id {} because it does not exist. Ignoring request", id);
+                return new UserNotFoundException("No user available with id: " + id);
             });
     }
 
 
     @Transactional
-    public UserDTO deleteUser(Long id)
+    public UserDTO deleteUser(Long id) throws UserNotFoundException
     {
-        return userRepository.findById(id)
+        return userRepository.findByIdAndEnabledIsTrue(id)
             .map(user ->
             {
                 user.setEnabled(false);
@@ -100,11 +99,12 @@ public class UserService implements UserDetailsService
                 log.debug("Deleted user: {}", id);
                 return user;
             })
-            .orElseGet(() ->
-            {
+            .orElseThrow(() -> {
                 log.info("Cannot delete user with id {} because it does not exist. Ignoring request", id);
-                return null;
+                return new UserNotFoundException("No user available with id: " + id);
             });
+
+
     }
 
 
@@ -112,14 +112,14 @@ public class UserService implements UserDetailsService
     @Transactional
     public UserDTO getUser(Long id) throws UserNotFoundException
     {
-        return userRepository.findById(id)
+        return userRepository.findByIdAndEnabledIsTrue(id)
             .orElseThrow(() -> new UserNotFoundException("No user available with id: " + id));
     }
 
 
     public List<UserDTO> getUsers()
     {
-        return userRepository.findAll();
+        return userRepository.findAllByEnabledIsTrue();
     }
 
 
@@ -139,7 +139,7 @@ public class UserService implements UserDetailsService
     @Transactional
     public UserDetails loadUserById(Long id)
     {
-        UserDTO user = userRepository.findById(id).orElseThrow(
+        UserDTO user = userRepository.findByIdAndEnabledIsTrue(id).orElseThrow(
             () -> new UsernameNotFoundException("User not found with id : " + id)
         );
 

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<UserDTO, Long>
 {
-    Optional<UserDTO> findById(Long id);
+    Optional<UserDTO> findByIdAndEnabledIsTrue(Long id);
 
-    List<UserDTO> findAll();
+    List<UserDTO> findAllByEnabledIsTrue();
 
     Optional<UserDTO> findByEmail(String email);
 

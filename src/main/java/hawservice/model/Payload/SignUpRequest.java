@@ -22,6 +22,10 @@ public class SignUpRequest
     private String email;
 
     @NotBlank
+    @Size(max = 40)
+    private String registrationCode;
+
+    @NotBlank
     @Size(min = 6, max = 20)
     private String password;
 

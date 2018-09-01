@@ -93,8 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .permitAll()
             .antMatchers("/api/auth/**")
             .permitAll()
-            .antMatchers("/v1/event/*", "/v1/users/*")
-            .permitAll()
+            .antMatchers("/v1/event/*", "/v1/users/*").access("hasAnyRole('USER')")
             .anyRequest()
             .authenticated();
 
