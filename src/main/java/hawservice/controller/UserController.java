@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,15 +28,6 @@ public class UserController
     private UserService userService;
 
 
-    @PostMapping(produces = "application/json")
-    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO userDTO)
-    {
-        UserDTO user = userService.createUser(userDTO);
-
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-    }
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id) throws UserNotFoundException
     {
@@ -52,15 +42,8 @@ public class UserController
     }
 
 
-    @GetMapping("/login")
-    public ResponseEntity<UserDTO> confirmPassword(@RequestParam String email, @RequestParam String password)
-    {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserDTO userDTO)
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserDTO userDTO) throws UserNotFoundException
     {
         UserDTO result = userService.updateUser(id, userDTO);
 

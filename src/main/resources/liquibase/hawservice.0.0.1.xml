@@ -11,25 +11,25 @@
             <column name="date_created" defaultValueComputed="now()" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="code" type="varchar(255)">
+            <column name="registrationCode" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="varchar(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="first_name" type="varchar(255)">
+            <column name="firstName" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_name" type="varchar(255)">
+            <column name="lastName" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="grad_year" type="varchar(255)">
+            <column name="gradYear" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
-            <column name="geo_location_old" type="varchar(255)">
+            <column name="geoLocationOld" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
-            <column name="geo_location_new" type="varchar(255)">
+            <column name="geoLocationNew" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
             <column name="password" type="varchar(255)">
